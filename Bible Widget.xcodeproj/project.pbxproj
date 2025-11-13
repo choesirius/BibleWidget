@@ -1,0 +1,768 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		3690CCDD2EBDD45200D69A96 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3690CCDC2EBDD45100D69A96 /* WidgetKit.framework */; };
+		3690CCDF2EBDD45200D69A96 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3690CCDE2EBDD45200D69A96 /* SwiftUI.framework */; };
+		3690CCEE2EBDD45400D69A96 /* bibleWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 3690CCDA2EBDD45100D69A96 /* bibleWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		3690CD0E2EBDD8BD00D69A96 /* korean_bible.json in Resources */ = {isa = PBXBuildFile; fileRef = 3690CD0D2EBDD8BD00D69A96 /* korean_bible.json */; };
+		3690CD0F2EBDD8BD00D69A96 /* curated_bible.json in Resources */ = {isa = PBXBuildFile; fileRef = 3690CD0C2EBDD8BD00D69A96 /* curated_bible.json */; };
+		3690CD102EBDD8BD00D69A96 /* korean_bible.json in Resources */ = {isa = PBXBuildFile; fileRef = 3690CD0D2EBDD8BD00D69A96 /* korean_bible.json */; };
+		3690CD112EBDD8BD00D69A96 /* curated_bible.json in Resources */ = {isa = PBXBuildFile; fileRef = 3690CD0C2EBDD8BD00D69A96 /* curated_bible.json */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		3690CCBA2EBDBACE00D69A96 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3690CCA42EBDBACA00D69A96 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3690CCAB2EBDBACA00D69A96;
+			remoteInfo = "Bible Widget";
+		};
+		3690CCC42EBDBACE00D69A96 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3690CCA42EBDBACA00D69A96 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3690CCAB2EBDBACA00D69A96;
+			remoteInfo = "Bible Widget";
+		};
+		3690CCEC2EBDD45400D69A96 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3690CCA42EBDBACA00D69A96 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3690CCD92EBDD45100D69A96;
+			remoteInfo = bibleWidgetExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		3690CCF32EBDD45400D69A96 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				3690CCEE2EBDD45400D69A96 /* bibleWidgetExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		3690CCAC2EBDBACA00D69A96 /* Bible Widget.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Bible Widget.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3690CCB92EBDBACE00D69A96 /* Bible WidgetTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Bible WidgetTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3690CCC32EBDBACE00D69A96 /* Bible WidgetUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Bible WidgetUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3690CCDA2EBDD45100D69A96 /* bibleWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = bibleWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		3690CCDC2EBDD45100D69A96 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		3690CCDE2EBDD45200D69A96 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		3690CD0C2EBDD8BD00D69A96 /* curated_bible.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = curated_bible.json; sourceTree = "<group>"; };
+		3690CD0D2EBDD8BD00D69A96 /* korean_bible.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = korean_bible.json; sourceTree = "<group>"; };
+		3690CD322EC59E7700D69A96 /* bibleWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = bibleWidgetExtension.entitlements; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		3690CCEF2EBDD45400D69A96 /* Exceptions for "bibleWidget" folder in "bibleWidgetExtension" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 3690CCD92EBDD45100D69A96 /* bibleWidgetExtension */;
+		};
+		3690CD152EBDDA4000D69A96 /* Exceptions for "Bible Widget" folder in "bibleWidgetExtension" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				BibleVerse.swift,
+			);
+			target = 3690CCD92EBDD45100D69A96 /* bibleWidgetExtension */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		3690CCAE2EBDBACA00D69A96 /* Bible Widget */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				3690CD152EBDDA4000D69A96 /* Exceptions for "Bible Widget" folder in "bibleWidgetExtension" target */,
+			);
+			path = "Bible Widget";
+			sourceTree = "<group>";
+		};
+		3690CCBC2EBDBACE00D69A96 /* Bible WidgetTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "Bible WidgetTests";
+			sourceTree = "<group>";
+		};
+		3690CCC62EBDBACE00D69A96 /* Bible WidgetUITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "Bible WidgetUITests";
+			sourceTree = "<group>";
+		};
+		3690CCE02EBDD45200D69A96 /* bibleWidget */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				3690CCEF2EBDD45400D69A96 /* Exceptions for "bibleWidget" folder in "bibleWidgetExtension" target */,
+			);
+			path = bibleWidget;
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		3690CCA92EBDBACA00D69A96 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3690CCB62EBDBACE00D69A96 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3690CCC02EBDBACE00D69A96 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3690CCD72EBDD45100D69A96 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3690CCDF2EBDD45200D69A96 /* SwiftUI.framework in Frameworks */,
+				3690CCDD2EBDD45200D69A96 /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		3690CCA32EBDBACA00D69A96 = {
+			isa = PBXGroup;
+			children = (
+				3690CD322EC59E7700D69A96 /* bibleWidgetExtension.entitlements */,
+				3690CCAE2EBDBACA00D69A96 /* Bible Widget */,
+				3690CCBC2EBDBACE00D69A96 /* Bible WidgetTests */,
+				3690CCC62EBDBACE00D69A96 /* Bible WidgetUITests */,
+				3690CCE02EBDD45200D69A96 /* bibleWidget */,
+				3690CCDB2EBDD45100D69A96 /* Frameworks */,
+				3690CCAD2EBDBACA00D69A96 /* Products */,
+				3690CD0C2EBDD8BD00D69A96 /* curated_bible.json */,
+				3690CD0D2EBDD8BD00D69A96 /* korean_bible.json */,
+			);
+			sourceTree = "<group>";
+		};
+		3690CCAD2EBDBACA00D69A96 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3690CCAC2EBDBACA00D69A96 /* Bible Widget.app */,
+				3690CCB92EBDBACE00D69A96 /* Bible WidgetTests.xctest */,
+				3690CCC32EBDBACE00D69A96 /* Bible WidgetUITests.xctest */,
+				3690CCDA2EBDD45100D69A96 /* bibleWidgetExtension.appex */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		3690CCDB2EBDD45100D69A96 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3690CCDC2EBDD45100D69A96 /* WidgetKit.framework */,
+				3690CCDE2EBDD45200D69A96 /* SwiftUI.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		3690CCAB2EBDBACA00D69A96 /* Bible Widget */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3690CCCD2EBDBACE00D69A96 /* Build configuration list for PBXNativeTarget "Bible Widget" */;
+			buildPhases = (
+				3690CCA82EBDBACA00D69A96 /* Sources */,
+				3690CCA92EBDBACA00D69A96 /* Frameworks */,
+				3690CCAA2EBDBACA00D69A96 /* Resources */,
+				3690CCF32EBDD45400D69A96 /* Embed Foundation Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				3690CCED2EBDD45400D69A96 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				3690CCAE2EBDBACA00D69A96 /* Bible Widget */,
+			);
+			name = "Bible Widget";
+			packageProductDependencies = (
+			);
+			productName = "Bible Widget";
+			productReference = 3690CCAC2EBDBACA00D69A96 /* Bible Widget.app */;
+			productType = "com.apple.product-type.application";
+		};
+		3690CCB82EBDBACE00D69A96 /* Bible WidgetTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3690CCD02EBDBACE00D69A96 /* Build configuration list for PBXNativeTarget "Bible WidgetTests" */;
+			buildPhases = (
+				3690CCB52EBDBACE00D69A96 /* Sources */,
+				3690CCB62EBDBACE00D69A96 /* Frameworks */,
+				3690CCB72EBDBACE00D69A96 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				3690CCBB2EBDBACE00D69A96 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				3690CCBC2EBDBACE00D69A96 /* Bible WidgetTests */,
+			);
+			name = "Bible WidgetTests";
+			packageProductDependencies = (
+			);
+			productName = "Bible WidgetTests";
+			productReference = 3690CCB92EBDBACE00D69A96 /* Bible WidgetTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		3690CCC22EBDBACE00D69A96 /* Bible WidgetUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3690CCD32EBDBACE00D69A96 /* Build configuration list for PBXNativeTarget "Bible WidgetUITests" */;
+			buildPhases = (
+				3690CCBF2EBDBACE00D69A96 /* Sources */,
+				3690CCC02EBDBACE00D69A96 /* Frameworks */,
+				3690CCC12EBDBACE00D69A96 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				3690CCC52EBDBACE00D69A96 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				3690CCC62EBDBACE00D69A96 /* Bible WidgetUITests */,
+			);
+			name = "Bible WidgetUITests";
+			packageProductDependencies = (
+			);
+			productName = "Bible WidgetUITests";
+			productReference = 3690CCC32EBDBACE00D69A96 /* Bible WidgetUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+		3690CCD92EBDD45100D69A96 /* bibleWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3690CCF02EBDD45400D69A96 /* Build configuration list for PBXNativeTarget "bibleWidgetExtension" */;
+			buildPhases = (
+				3690CCD62EBDD45100D69A96 /* Sources */,
+				3690CCD72EBDD45100D69A96 /* Frameworks */,
+				3690CCD82EBDD45100D69A96 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				3690CCE02EBDD45200D69A96 /* bibleWidget */,
+			);
+			name = bibleWidgetExtension;
+			packageProductDependencies = (
+			);
+			productName = bibleWidgetExtension;
+			productReference = 3690CCDA2EBDD45100D69A96 /* bibleWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		3690CCA42EBDBACA00D69A96 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1630;
+				LastUpgradeCheck = 1630;
+				TargetAttributes = {
+					3690CCAB2EBDBACA00D69A96 = {
+						CreatedOnToolsVersion = 16.3;
+					};
+					3690CCB82EBDBACE00D69A96 = {
+						CreatedOnToolsVersion = 16.3;
+						TestTargetID = 3690CCAB2EBDBACA00D69A96;
+					};
+					3690CCC22EBDBACE00D69A96 = {
+						CreatedOnToolsVersion = 16.3;
+						TestTargetID = 3690CCAB2EBDBACA00D69A96;
+					};
+					3690CCD92EBDD45100D69A96 = {
+						CreatedOnToolsVersion = 16.3;
+					};
+				};
+			};
+			buildConfigurationList = 3690CCA72EBDBACA00D69A96 /* Build configuration list for PBXProject "Bible Widget" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 3690CCA32EBDBACA00D69A96;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 3690CCAD2EBDBACA00D69A96 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				3690CCAB2EBDBACA00D69A96 /* Bible Widget */,
+				3690CCB82EBDBACE00D69A96 /* Bible WidgetTests */,
+				3690CCC22EBDBACE00D69A96 /* Bible WidgetUITests */,
+				3690CCD92EBDD45100D69A96 /* bibleWidgetExtension */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		3690CCAA2EBDBACA00D69A96 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3690CD102EBDD8BD00D69A96 /* korean_bible.json in Resources */,
+				3690CD112EBDD8BD00D69A96 /* curated_bible.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3690CCB72EBDBACE00D69A96 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3690CCC12EBDBACE00D69A96 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3690CCD82EBDD45100D69A96 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3690CD0E2EBDD8BD00D69A96 /* korean_bible.json in Resources */,
+				3690CD0F2EBDD8BD00D69A96 /* curated_bible.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		3690CCA82EBDBACA00D69A96 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3690CCB52EBDBACE00D69A96 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3690CCBF2EBDBACE00D69A96 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3690CCD62EBDD45100D69A96 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		3690CCBB2EBDBACE00D69A96 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3690CCAB2EBDBACA00D69A96 /* Bible Widget */;
+			targetProxy = 3690CCBA2EBDBACE00D69A96 /* PBXContainerItemProxy */;
+		};
+		3690CCC52EBDBACE00D69A96 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3690CCAB2EBDBACA00D69A96 /* Bible Widget */;
+			targetProxy = 3690CCC42EBDBACE00D69A96 /* PBXContainerItemProxy */;
+		};
+		3690CCED2EBDD45400D69A96 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3690CCD92EBDD45100D69A96 /* bibleWidgetExtension */;
+			targetProxy = 3690CCEC2EBDD45400D69A96 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		3690CCCB2EBDBACE00D69A96 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.4;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		3690CCCC2EBDBACE00D69A96 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.4;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		3690CCCE2EBDBACE00D69A96 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Bible Widget/Bible Widget.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 45V2N7AR9M;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "성경 위젯";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.taehun.Bible-Widget";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		3690CCCF2EBDBACE00D69A96 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Bible Widget/Bible Widget.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 45V2N7AR9M;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "성경 위젯";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.taehun.Bible-Widget";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		3690CCD12EBDBACE00D69A96 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.taehun.Bible-WidgetTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Bible Widget.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Bible Widget";
+			};
+			name = Debug;
+		};
+		3690CCD22EBDBACE00D69A96 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.taehun.Bible-WidgetTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Bible Widget.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Bible Widget";
+			};
+			name = Release;
+		};
+		3690CCD42EBDBACE00D69A96 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.taehun.Bible-WidgetUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Bible Widget";
+			};
+			name = Debug;
+		};
+		3690CCD52EBDBACE00D69A96 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.taehun.Bible-WidgetUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Bible Widget";
+			};
+			name = Release;
+		};
+		3690CCF12EBDD45400D69A96 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = bibleWidgetExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 45V2N7AR9M;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = bibleWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = bibleWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.taehun.Bible-Widget.bibleWidget";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		3690CCF22EBDD45400D69A96 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = bibleWidgetExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 45V2N7AR9M;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = bibleWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = bibleWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.taehun.Bible-Widget.bibleWidget";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		3690CCA72EBDBACA00D69A96 /* Build configuration list for PBXProject "Bible Widget" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3690CCCB2EBDBACE00D69A96 /* Debug */,
+				3690CCCC2EBDBACE00D69A96 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3690CCCD2EBDBACE00D69A96 /* Build configuration list for PBXNativeTarget "Bible Widget" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3690CCCE2EBDBACE00D69A96 /* Debug */,
+				3690CCCF2EBDBACE00D69A96 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3690CCD02EBDBACE00D69A96 /* Build configuration list for PBXNativeTarget "Bible WidgetTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3690CCD12EBDBACE00D69A96 /* Debug */,
+				3690CCD22EBDBACE00D69A96 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3690CCD32EBDBACE00D69A96 /* Build configuration list for PBXNativeTarget "Bible WidgetUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3690CCD42EBDBACE00D69A96 /* Debug */,
+				3690CCD52EBDBACE00D69A96 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3690CCF02EBDD45400D69A96 /* Build configuration list for PBXNativeTarget "bibleWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3690CCF12EBDD45400D69A96 /* Debug */,
+				3690CCF22EBDD45400D69A96 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 3690CCA42EBDBACA00D69A96 /* Project object */;
+}
