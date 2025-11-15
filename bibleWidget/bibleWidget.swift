@@ -22,23 +22,14 @@ struct Provider: TimelineProvider {
     }
 
     func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
-        var entries: [SimpleEntry] = []
-
-        // 오늘 자정부터 7일치 엔트리 생성
         let calendar = Calendar.current
         let today = calendar.startOfDay(for: Date())
 
-        for dayOffset in 0..<7 {
-            // 각 날짜의 자정
-            let entryDate = calendar.date(byAdding: .day, value: dayOffset, to: today)!
-            let verse = BibleVerseManager.shared.getVerseForDate(entryDate)
-            let entry = SimpleEntry(date: entryDate, verse: verse)
-            entries.append(entry)
-        }
+        let verse = BibleVerseManager.shared.getVerseForDate(today)
+        let entry = SimpleEntry(date: today, verse: verse)
 
-        // 다음 자정에 업데이트
         let tomorrow = calendar.date(byAdding: .day, value: 1, to: today)!
-        let timeline = Timeline(entries: entries, policy: .after(tomorrow))
+        let timeline = Timeline(entries: [entry], policy: .after(tomorrow))
         completion(timeline)
     }
 }
@@ -92,23 +83,22 @@ struct bibleWidgetEntryView : View {
 
         default:
             // 홈 화면 위젯
-            VStack(spacing: 10) {
+            VStack(spacing: 8) {
                 Spacer(minLength: 0)
 
                 // 상단: 출처 (가운데 정렬)
                 Text(entry.verse.reference)
-                    .font(fontForFamily())
+                    .font(referenceFontForFamily())
                     .foregroundStyle(.secondary)
                     .frame(maxWidth: .infinity, alignment: .center)
 
                 // 중앙: 본문 (가운데 정렬)
                 Text(entry.verse.text)
-                    .font(fontForFamily())
+                    .font(textFontForFamily())
                     .foregroundStyle(.primary)
-                    .lineLimit(lineLimit())
-                    .minimumScaleFactor(0.85)
+                    .minimumScaleFactor(minimumScaleForFamily())
                     .multilineTextAlignment(.center)
-                    .lineSpacing(2)
+                    .lineSpacing(lineSpacingForFamily())
                     .frame(maxWidth: .infinity)
 
                 Spacer(minLength: 0)
@@ -119,31 +109,50 @@ struct bibleWidgetEntryView : View {
         }
     }
 
-    // 위젯 크기별 폰트
-    private func fontForFamily() -> Font {
+    // 출처 폰트 크기
+    private func referenceFontForFamily() -> Font {
         switch family {
         case .systemSmall:
-            return .system(size: 15, weight: .medium, design: .default)
+            return .system(size: 12, weight: .medium)
         case .systemMedium:
-            return .system(size: 16, weight: .medium, design: .default)
+            return .system(size: 13, weight: .medium)
         case .systemLarge:
-            return .system(size: 18, weight: .medium, design: .default)
+            return .system(size: 15, weight: .medium)
         default:
-            return .system(size: 16, weight: .medium, design: .default)
+            return .system(size: 13, weight: .medium)
         }
     }
 
-    // 위젯 크기별 최대 라인 수
-    private func lineLimit() -> Int {
+    // 본문 폰트 크기
+    private func textFontForFamily() -> Font {
         switch family {
         case .systemSmall:
-            return 6
+            return .system(size: 14, weight: .regular)
         case .systemMedium:
-            return 4
+            return .system(size: 15, weight: .regular)
         case .systemLarge:
-            return 12
+            return .system(size: 17, weight: .regular)
         default:
-            return 6
+            return .system(size: 15, weight: .regular)
+        }
+    }
+
+    // 최소 축소 배율 (긴 텍스트 대응)
+    private func minimumScaleForFamily() -> CGFloat {
+        return 0.9  // 모든 크기 90%까지 축소
+    }
+
+    // 줄 간격
+    private func lineSpacingForFamily() -> CGFloat {
+        switch family {
+        case .systemSmall:
+            return 1
+        case .systemMedium:
+            return 1.5
+        case .systemLarge:
+            return 2
+        default:
+            return 1.5
         }
     }
 
@@ -151,13 +160,13 @@ struct bibleWidgetEntryView : View {
     private func horizontalPadding() -> CGFloat {
         switch family {
         case .systemSmall:
-            return 16
+            return 6
         case .systemMedium:
-            return 20
+            return 10
         case .systemLarge:
-            return 24
+            return 14
         default:
-            return 16
+            return 10
         }
     }
 
@@ -165,13 +174,13 @@ struct bibleWidgetEntryView : View {
     private func verticalPadding() -> CGFloat {
         switch family {
         case .systemSmall:
-            return 16
+            return 6
         case .systemMedium:
-            return 18
+            return 8
         case .systemLarge:
-            return 20
+            return 10
         default:
-            return 16
+            return 8
         }
     }
 }
@@ -182,12 +191,7 @@ struct bibleWidget: Widget {
 
     var body: some WidgetConfiguration {
         StaticConfiguration(kind: kind, provider: Provider()) { entry in
-            if #available(iOS 17.0, *) {
-                bibleWidgetEntryView(entry: entry)
-                    .containerBackground(.fill.tertiary, for: .widget)
-            } else {
-                bibleWidgetEntryView(entry: entry)
-            }
+            bibleWidgetEntryView(entry: entry)
         }
         .configurationDisplayName("오늘의 말씀")
         .description("매일 새로운 성경 구절을 전해드립니다.")

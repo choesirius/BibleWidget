@@ -120,7 +120,6 @@ class BibleVerseManager {
         if let savedSeed = sharedDefaults?.object(forKey: key) as? Int {
             deviceSeed = savedSeed
         } else {
-            // 새로운 랜덤 시드 생성
             deviceSeed = Int.random(in: 0...Int.max)
             sharedDefaults?.set(deviceSeed, forKey: key)
         }
@@ -131,12 +130,10 @@ class BibleVerseManager {
         guard let url = Bundle.main.url(forResource: "curated_bible", withExtension: "json"),
               let data = try? Data(contentsOf: url),
               let bibleData = try? JSONDecoder().decode(BibleData.self, from: data) else {
-            print("❌ Failed to load bible verses")
             return
         }
 
         self.verses = bibleData.verses
-        print("✅ Loaded \(verses.count) verses")
     }
 
     // 날짜 + 디바이스 기반으로 랜덤 구절 선택 (같은 날은 같은 구절, 디바이스마다 다름)
@@ -151,18 +148,28 @@ class BibleVerseManager {
             )
         }
 
-        // 날짜를 시드로 사용 (년-월-일만 사용해서 같은 날은 같은 구절)
+        // 날짜를 결정적 해시로 변환 (프로세스 독립적)
         let calendar = Calendar.current
         let components = calendar.dateComponents([.year, .month, .day], from: date)
 
-        // 날짜를 숫자로 변환 (예: 2025-11-07 -> 20251107)
-        let dateSeed = components.year! * 10000 + components.month! * 100 + components.day!
+        // 간단한 결정적 해시 함수 (큰 소수들 사용)
+        let year = components.year ?? 0
+        let month = components.month ?? 0
+        let day = components.day ?? 0
 
-        // 날짜 시드 + 디바이스 시드를 조합하여 최종 시드 생성
-        let combinedSeed = dateSeed &+ deviceSeed
+        var hash = deviceSeed
+        hash = hash &* 31 &+ year
+        hash = hash &* 31 &+ month
+        hash = hash &* 31 &+ day
 
-        // 시드 기반으로 인덱스 선택
-        let index = abs(combinedSeed) % verses.count
+        // 추가 믹싱으로 균등 분포 개선
+        hash = hash ^ (hash >> 16)
+        hash = hash &* 0x85ebca6b
+        hash = hash ^ (hash >> 13)
+        hash = hash &* 0xc2b2ae35
+        hash = hash ^ (hash >> 16)
+
+        let index = abs(hash) % verses.count
 
         return verses[index]
     }

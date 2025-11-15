@@ -54,10 +54,12 @@ To test widgets:
 ## Key Implementation Details
 
 ### Verse Selection Algorithm
-Date-based deterministic selection ensures:
-- Same verse shown across main app and all widgets on same date
-- Consistent experience throughout the day
-- Predictable behavior for debugging
+Device-specific deterministic selection using combined seed (`dateSeed + deviceSeed`):
+- **Date seed**: `(year * 10000 + month * 100 + day)` - ensures same verse all day
+- **Device seed**: Random value stored in App Group UserDefaults on first launch
+- **Result**: Same verse across main app and all widgets on same date, but different between devices
+- Device seed persists via `group.com.taehun.biblewidget` App Group
+- Algorithm: `index = abs(dateSeed + deviceSeed) % verse_count`
 
 ### Widget Timeline Management
 - 7-day timeline pre-generated at midnight
@@ -65,11 +67,23 @@ Date-based deterministic selection ensures:
 - Each entry uses `BibleVerseManager.getVerseForDate()` for its specific date
 
 ### Shared Code Between Targets
-`BibleVerse.swift` must be included in both:
+**`BibleVerse.swift`** must be included in both targets:
 - "Bible Widget" app target
 - "bibleWidgetExtension" target
 
 Check target membership in Xcode File Inspector if BibleVerseManager is not accessible.
+
+### App Groups for Data Sharing
+Both targets use App Group `group.com.taehun.biblewidget` (configured in entitlements):
+- Shares device seed via UserDefaults for consistent verse selection
+- Required for widget extension to access shared data
+- Bundle ID: `com.taehun.biblewidget`
+
+### Book Abbreviations
+`BibleVerse.bookShort` provides Korean abbreviations for all 66 books (구약 39권 + 신약 27권):
+- Used in circular lock screen widget to fit book name
+- Examples: "창세기" → "창", "요한복음" → "요", "고린도전서" → "고전"
+- Full mapping in [BibleVerse.swift:31-101](Bible Widget/BibleVerse.swift#L31)
 
 ### Korean Localization
 All user-facing strings are hardcoded in Korean:
