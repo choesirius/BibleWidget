@@ -9,6 +9,24 @@ iOS Bible Widget application that displays daily Bible verses in Korean. The pro
 - Widget extension ([bibleWidget/](bibleWidget/)) - Provides home screen and lock screen widgets
 - Bible verse data ([curated_bible.json](curated_bible.json)) - 1,524 hand-curated Korean Bible verses
 
+**Version**: 1.0.1 (build 2)
+**Bundle ID**: `com.taehun.Bible-Widget`
+**Widget Extension ID**: `com.taehun.Bible-Widget.bibleWidget`
+**Min iOS**: 15.6 (main app), 18.4 (tests)
+
+## ⚖️ CRITICAL: Public Domain Requirement
+
+**This app is intended for commercial use (paid app). ALL Bible translations MUST be in the PUBLIC DOMAIN.**
+
+- ✅ **ALLOWED**: Translations with NO copyright restrictions (public domain, freely reproducible for commercial use)
+- ❌ **FORBIDDEN**: Any copyrighted translations requiring licenses, permissions, or royalties
+- **Examples of Public Domain translations**:
+  - Korean: 개역한글 (KRV), 개역성경
+  - English: King James Version (KJV), World English Bible (WEB), American Standard Version (ASV)
+  - Other languages: Verify public domain status before adding
+
+**When adding new translations**: ALWAYS verify the translation is 100% public domain and freely usable for commercial purposes. Do NOT add any translation without explicit confirmation of its public domain status.
+
 ## Building and Running
 
 This is an Xcode project. Build and run using:
@@ -28,7 +46,7 @@ To test widgets:
 **[BibleVerse.swift](Bible Widget/BibleVerse.swift)** contains all data models and management:
 - `BibleData` / `BibleVerse` - Codable models matching JSON structure
 - `BibleVerseManager` - Singleton that loads verses from `curated_bible.json`
-- Date-based deterministic selection: Same date always returns same verse using `(year * 10000 + month * 100 + day) % verse_count`
+- Date-based deterministic verse selection with device-specific randomization
 
 ### Main App
 - **[Bible_WidgetApp.swift](Bible Widget/Bible_WidgetApp.swift)** - App entry point
@@ -41,7 +59,7 @@ To test widgets:
 3. `BibleVerseTextWidget` - Lock screen, text only
 
 **[bibleWidget.swift](bibleWidget/bibleWidget.swift)** implements widget logic:
-- `Provider` - TimelineProvider that generates 7-day timeline, updates at midnight
+- `Provider` - TimelineProvider that generates 1-day timeline, updates at midnight
 - `bibleWidgetEntryView` - Adaptive UI supporting:
   - Home screen: `.systemSmall`, `.systemMedium`, `.systemLarge`
   - Lock screen: `.accessoryCircular`, `.accessoryRectangular`, `.accessoryInline`
@@ -54,17 +72,29 @@ To test widgets:
 ## Key Implementation Details
 
 ### Verse Selection Algorithm
-Device-specific deterministic selection using combined seed (`dateSeed + deviceSeed`):
-- **Date seed**: `(year * 10000 + month * 100 + day)` - ensures same verse all day
-- **Device seed**: Random value stored in App Group UserDefaults on first launch
-- **Result**: Same verse across main app and all widgets on same date, but different between devices
-- Device seed persists via `group.com.taehun.biblewidget` App Group
-- Algorithm: `index = abs(dateSeed + deviceSeed) % verse_count`
+Device-specific deterministic selection using hash mixing ([BibleVerse.swift:140-175](Bible Widget/BibleVerse.swift#L140)):
+
+1. **Device seed**: Random value generated on first launch, stored in App Group UserDefaults
+2. **Date-based hashing**: Combines device seed with year, month, and day
+3. **Hash mixing**: Uses multiplicative hashing with prime numbers (31, 0x85ebca6b, 0xc2b2ae35) and XOR operations for uniform distribution
+4. **Result**: Same verse all day across all widgets on same device, but different verses across different devices
+5. **Persistence**: Device seed stored via `group.com.taehun.biblewidget` App Group
+
+```swift
+// Simplified algorithm (see BibleVerse.swift for full implementation)
+var hash = deviceSeed
+hash = hash &* 31 &+ year
+hash = hash &* 31 &+ month
+hash = hash &* 31 &+ day
+// Additional mixing for uniform distribution...
+let index = abs(hash) % verses.count
+```
 
 ### Widget Timeline Management
-- 7-day timeline pre-generated at midnight
-- Updates automatically via `.after(tomorrow)` policy
-- Each entry uses `BibleVerseManager.getVerseForDate()` for its specific date
+- Single entry timeline generated per update ([bibleWidget.swift:24-34](bibleWidget/bibleWidget.swift#L24))
+- Timeline updates automatically at midnight via `.after(tomorrow)` policy
+- Each update calls `BibleVerseManager.getVerseForDate()` for the current date
+- WidgetKit handles the midnight refresh automatically
 
 ### Shared Code Between Targets
 **`BibleVerse.swift`** must be included in both targets:
@@ -77,11 +107,11 @@ Check target membership in Xcode File Inspector if BibleVerseManager is not acce
 Both targets use App Group `group.com.taehun.biblewidget` (configured in entitlements):
 - Shares device seed via UserDefaults for consistent verse selection
 - Required for widget extension to access shared data
-- Bundle ID: `com.taehun.biblewidget`
+- Ensures same verse appears in main app and all widgets on same date
 
 ### Book Abbreviations
 `BibleVerse.bookShort` provides Korean abbreviations for all 66 books (구약 39권 + 신약 27권):
-- Used in circular lock screen widget to fit book name
+- Used in circular lock screen widget to fit book name in limited space
 - Examples: "창세기" → "창", "요한복음" → "요", "고린도전서" → "고전"
 - Full mapping in [BibleVerse.swift:31-101](Bible Widget/BibleVerse.swift#L31)
 
@@ -90,6 +120,13 @@ All user-facing strings are hardcoded in Korean:
 - Main app: "오늘의 말씀", date format "yyyy년 M월 d일"
 - Widget: "오늘의 말씀", "매일 새로운 성경 구절을 전해드립니다"
 - No localization files currently used
+
+### Widget UI Adaptations
+Home screen widgets adapt font sizes and padding based on widget family:
+- **Small**: 14pt text, 12pt reference, minimal padding (6pt)
+- **Medium**: 15pt text, 13pt reference, moderate padding (10pt)
+- **Large**: 17pt text, 15pt reference, larger padding (14pt)
+- All sizes support 90% minimum scale factor for long verses
 
 ## Testing
 

@@ -1,0 +1,7 @@
+/*
+  InfoPlist.strings
+  Bible Widget (Korean)
+*/
+
+"CFBundleDisplayName" = "성경 위젯";
+"CFBundleName" = "성경 위젯";

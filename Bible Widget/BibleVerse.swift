@@ -6,110 +6,44 @@
 //
 
 import Foundation
+import WidgetKit
 
 // JSON 구조에 맞는 데이터 모델
 struct BibleData: Codable {
     let version: String
     let description: String
     let total_verses: Int
-    let verses: [BibleVerse]
+    let books: [String: BookInfo]
+    let verses: [String: String]  // "GEN.1.1": "text"
 }
 
-struct BibleVerse: Codable {
-    let book: String
+struct BookInfo: Codable {
+    let name: String
+    let abbr: String
+}
+
+// 표시용 구절 모델
+struct BibleVerse {
+    let reference: String     // "창세기 1:1" 또는 "Genesis 1:1" (전체 이름)
+    let text: String
+    let bookName: String      // "창세기" 또는 "Genesis"
+    let bookAbbr: String      // "창" 또는 "Gen"
+    let bookId: String        // "GEN" (잠금화면 원형 위젯용)
     let chapter: Int
     let verse: Int
-    let reference: String
-    let text: String
-
-    // 책 이름 약어 반환
-    var bookShort: String {
-        return BibleVerse.bookAbbreviations[book] ?? book
-    }
-
-    // 성경 66권 약어 매핑
-    static let bookAbbreviations: [String: String] = [
-        // 구약 (39권)
-        "창세기": "창",
-        "출애굽기": "출",
-        "레위기": "레",
-        "민수기": "민",
-        "신명기": "신",
-        "여호수아": "수",
-        "사사기": "삿",
-        "룻기": "룻",
-        "사무엘상": "삼상",
-        "사무엘하": "삼하",
-        "열왕기상": "왕상",
-        "열왕기하": "왕하",
-        "역대상": "대상",
-        "역대하": "대하",
-        "에스라": "스",
-        "느헤미야": "느",
-        "에스더": "에",
-        "욥기": "욥",
-        "시편": "시",
-        "잠언": "잠",
-        "전도서": "전",
-        "아가": "아",
-        "이사야": "사",
-        "예레미야": "렘",
-        "예레미야애가": "애",
-        "에스겔": "겔",
-        "다니엘": "단",
-        "호세아": "호",
-        "요엘": "욜",
-        "아모스": "암",
-        "오바댜": "옵",
-        "요나": "욘",
-        "미가": "미",
-        "나훔": "나",
-        "하박국": "합",
-        "스바냐": "습",
-        "학개": "학",
-        "스가랴": "슥",
-        "말라기": "말",
-
-        // 신약 (27권)
-        "마태복음": "마",
-        "마가복음": "막",
-        "누가복음": "눅",
-        "요한복음": "요",
-        "사도행전": "행",
-        "로마서": "롬",
-        "고린도전서": "고전",
-        "고린도후서": "고후",
-        "갈라디아서": "갈",
-        "에베소서": "엡",
-        "빌립보서": "빌",
-        "골로새서": "골",
-        "데살로니가전서": "살전",
-        "데살로니가후서": "살후",
-        "디모데전서": "딤전",
-        "디모데후서": "딤후",
-        "디도서": "딛",
-        "빌레몬서": "몬",
-        "히브리서": "히",
-        "야고보서": "약",
-        "베드로전서": "벧전",
-        "베드로후서": "벧후",
-        "요한일서": "요일",
-        "요한이서": "요이",
-        "요한삼서": "요삼",
-        "유다서": "유",
-        "요한계시록": "계"
-    ]
 }
 
 // 성경 구절 관리 클래스
 class BibleVerseManager {
     static let shared = BibleVerseManager()
-    private var verses: [BibleVerse] = []
+
+    private var bibleDataCache: [String: BibleData] = [:]
     private var deviceSeed: Int = 0
+    private var curatedRefs: [String] = []
 
     private init() {
-        loadVerses()
         loadOrCreateDeviceSeed()
+        loadCuratedReferences()
     }
 
     // 디바이스별 고유 시드 생성 또는 로드
@@ -125,34 +59,98 @@ class BibleVerseManager {
         }
     }
 
-    // JSON 파일에서 구절 로드
-    private func loadVerses() {
-        guard let url = Bundle.main.url(forResource: "curated_bible", withExtension: "json"),
+    // 큐레이션된 590개 참조 로드
+    private func loadCuratedReferences() {
+        guard let url = Bundle.main.url(forResource: "curated_references", withExtension: "json"),
               let data = try? Data(contentsOf: url),
-              let bibleData = try? JSONDecoder().decode(BibleData.self, from: data) else {
+              let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
+              let refs = json["references"] as? [String] else {
             return
         }
-
-        self.verses = bibleData.verses
+        self.curatedRefs = refs
     }
 
-    // 날짜 + 디바이스 기반으로 랜덤 구절 선택 (같은 날은 같은 구절, 디바이스마다 다름)
-    func getVerseForDate(_ date: Date) -> BibleVerse {
-        guard !verses.isEmpty else {
+    // 특정 언어의 Bible 데이터 로드
+    private func loadBibleData(for language: BibleLanguage) -> BibleData? {
+        // 캐시 확인
+        if let cached = bibleDataCache[language.rawValue] {
+            return cached
+        }
+
+        // JSON 파일 로드
+        guard let url = Bundle.main.url(forResource: language.fileName, withExtension: "json"),
+              let data = try? Data(contentsOf: url),
+              let bibleData = try? JSONDecoder().decode(BibleData.self, from: data) else {
+            return nil
+        }
+
+        // 캐시에 저장
+        bibleDataCache[language.rawValue] = bibleData
+        return bibleData
+    }
+
+    // 러시아어 Psalm 매핑 (LXX 번호 체계로 변환)
+    private func mapRussianPsalmReference(_ ref: String) -> String {
+        let parts = ref.split(separator: ".")
+        guard parts.count == 3, parts[0] == "PSA",
+              let psalmNum = Int(parts[1]),
+              let verseNum = Int(parts[2]) else {
+            return ref
+        }
+
+        // Psalm 번호별 매핑 규칙
+        switch psalmNum {
+        case 1...9, 148...150:
+            return ref  // 동일
+        case 10:
+            return "PSA.9.\(verseNum + 21)"  // Psalm 9에 병합
+        case 11...113:
+            return "PSA.\(psalmNum - 1).\(verseNum)"  // -1 시프트
+        case 114:
+            return "PSA.113.\(verseNum)"  // Psalm 113에 병합
+        case 115:
+            return "PSA.113.\(verseNum + 8)"  // Psalm 113 연장
+        case 116:
+            return verseNum <= 9 ? "PSA.114.\(verseNum)" : "PSA.115.\(verseNum - 9)"  // 분할
+        case 117...146:
+            return "PSA.\(psalmNum - 1).\(verseNum)"  // -1 시프트
+        case 147:
+            return verseNum <= 11 ? "PSA.146.\(verseNum)" : "PSA.147.\(verseNum - 11)"  // 분할
+        default:
+            return ref
+        }
+    }
+
+    // 날짜 + 디바이스 기반으로 큐레이션된 구절 선택
+    func getVerseForDate(_ date: Date, language: BibleLanguage = .korean) -> BibleVerse {
+        guard !curatedRefs.isEmpty else {
             return BibleVerse(
-                book: "오류",
-                chapter: 0,
-                verse: 0,
                 reference: "오류",
-                text: "성경 구절을 불러올 수 없습니다."
+                text: "큐레이션 참조를 불러올 수 없습니다.",
+                bookName: "오류",
+                bookAbbr: "오류",
+                bookId: "ERR",
+                chapter: 0,
+                verse: 0
             )
         }
 
-        // 날짜를 결정적 해시로 변환 (프로세스 독립적)
+        guard let bibleData = loadBibleData(for: language) else {
+            return BibleVerse(
+                reference: "오류",
+                text: "성경 데이터를 불러올 수 없습니다.",
+                bookName: "오류",
+                bookAbbr: "오류",
+                bookId: "ERR",
+                chapter: 0,
+                verse: 0
+            )
+        }
+
+        // 날짜를 결정적 해시로 변환
         let calendar = Calendar.current
         let components = calendar.dateComponents([.year, .month, .day], from: date)
 
-        // 간단한 결정적 해시 함수 (큰 소수들 사용)
         let year = components.year ?? 0
         let month = components.month ?? 0
         let day = components.day ?? 0
@@ -169,13 +167,64 @@ class BibleVerseManager {
         hash = hash &* 0xc2b2ae35
         hash = hash ^ (hash >> 16)
 
-        let index = abs(hash) % verses.count
+        let index = abs(hash) % curatedRefs.count
+        var ref = curatedRefs[index]
 
-        return verses[index]
+        // 러시아어인 경우 Psalm 매핑 적용
+        if language == .russian {
+            ref = mapRussianPsalmReference(ref)
+        }
+
+        // 구절 텍스트 가져오기
+        guard let text = bibleData.verses[ref] else {
+            return BibleVerse(
+                reference: ref,
+                text: "구절을 찾을 수 없습니다.",
+                bookName: "",
+                bookAbbr: "",
+                bookId: "",
+                chapter: 0,
+                verse: 0
+            )
+        }
+
+        // 참조 파싱 (GEN.1.1)
+        let parts = ref.split(separator: ".")
+        guard parts.count == 3,
+              let chapter = Int(parts[1]),
+              let verse = Int(parts[2]) else {
+            return BibleVerse(
+                reference: ref,
+                text: text,
+                bookName: "",
+                bookAbbr: "",
+                bookId: "",
+                chapter: 0,
+                verse: 0
+            )
+        }
+
+        let bookId = String(parts[0])
+        let bookInfo = bibleData.books[bookId]
+        let bookName = bookInfo?.name ?? bookId
+        let bookAbbr = bookInfo?.abbr ?? bookId
+
+        // 표시용 참조 생성 (모든 언어 전체 이름 사용)
+        let displayRef = "\(bookName) \(chapter):\(verse)"
+
+        return BibleVerse(
+            reference: displayRef,
+            text: text,
+            bookName: bookName,
+            bookAbbr: bookAbbr,
+            bookId: bookId,  // 잠금화면 원형 위젯용
+            chapter: chapter,
+            verse: verse
+        )
     }
 
     // 오늘의 구절
-    func getTodayVerse() -> BibleVerse {
-        return getVerseForDate(Date())
+    func getTodayVerse(language: BibleLanguage = .korean) -> BibleVerse {
+        return getVerseForDate(Date(), language: language)
     }
 }

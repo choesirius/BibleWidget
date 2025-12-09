@@ -11,22 +11,25 @@ import SwiftUI
 // Timeline Provider - 위젯 업데이트 시점 관리
 struct Provider: TimelineProvider {
     func placeholder(in context: Context) -> SimpleEntry {
-        let verse = BibleVerseManager.shared.getTodayVerse()
-        return SimpleEntry(date: Date(), verse: verse)
+        let language = LanguageManager.shared.currentLanguage
+        let verse = BibleVerseManager.shared.getTodayVerse(language: language)
+        return SimpleEntry(date: Date(), verse: verse, language: language)
     }
 
     func getSnapshot(in context: Context, completion: @escaping (SimpleEntry) -> ()) {
-        let verse = BibleVerseManager.shared.getTodayVerse()
-        let entry = SimpleEntry(date: Date(), verse: verse)
+        let language = LanguageManager.shared.currentLanguage
+        let verse = BibleVerseManager.shared.getTodayVerse(language: language)
+        let entry = SimpleEntry(date: Date(), verse: verse, language: language)
         completion(entry)
     }
 
     func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
         let calendar = Calendar.current
         let today = calendar.startOfDay(for: Date())
+        let language = LanguageManager.shared.currentLanguage
 
-        let verse = BibleVerseManager.shared.getVerseForDate(today)
-        let entry = SimpleEntry(date: today, verse: verse)
+        let verse = BibleVerseManager.shared.getVerseForDate(today, language: language)
+        let entry = SimpleEntry(date: today, verse: verse, language: language)
 
         let tomorrow = calendar.date(byAdding: .day, value: 1, to: today)!
         let timeline = Timeline(entries: [entry], policy: .after(tomorrow))
@@ -38,6 +41,7 @@ struct Provider: TimelineProvider {
 struct SimpleEntry: TimelineEntry {
     let date: Date
     let verse: BibleVerse
+    let language: BibleLanguage
 }
 
 // Widget UI
@@ -52,7 +56,8 @@ struct bibleWidgetEntryView : View {
             ZStack {
                 AccessoryWidgetBackground()
                 VStack(spacing: 1) {
-                    Text(entry.verse.bookShort)
+                    // 한국어: 약어 (창), 나머지: bookId (GEN)
+                    Text(entry.language == .korean ? entry.verse.bookAbbr : entry.verse.bookId)
                         .font(.system(size: 13, weight: .semibold))
                         .lineLimit(1)
                     Text("\(entry.verse.chapter):\(entry.verse.verse)")
@@ -193,8 +198,8 @@ struct bibleWidget: Widget {
         StaticConfiguration(kind: kind, provider: Provider()) { entry in
             bibleWidgetEntryView(entry: entry)
         }
-        .configurationDisplayName("오늘의 말씀")
-        .description("매일 새로운 성경 구절을 전해드립니다.")
+        .configurationDisplayName(LanguageManager.shared.currentLanguage.widgetDisplayName)
+        .description(LanguageManager.shared.currentLanguage.widgetDescription)
         .supportedFamilies([
             .systemSmall,
             .systemMedium,
@@ -257,11 +262,14 @@ struct BibleVerseTextWidget: Widget {
     SimpleEntry(
         date: .now,
         verse: BibleVerse(
-            book: "요한복음",
-            chapter: 3,
-            verse: 16,
             reference: "요한복음 3:16",
-            text: "하나님이 세상을 이처럼 사랑하사 독생자를 주셨으니 이는 저를 믿는 자마다 멸망치 않고 영생을 얻게 하려 하심이니라"
-        )
+            text: "하나님이 세상을 이처럼 사랑하사 독생자를 주셨으니 이는 저를 믿는 자마다 멸망치 않고 영생을 얻게 하려 하심이니라",
+            bookName: "요한복음",
+            bookAbbr: "요",
+            bookId: "JHN",
+            chapter: 3,
+            verse: 16
+        ),
+        language: .korean
     )
 }

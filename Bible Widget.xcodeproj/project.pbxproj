@@ -10,10 +10,6 @@
 		3690CCDD2EBDD45200D69A96 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3690CCDC2EBDD45100D69A96 /* WidgetKit.framework */; };
 		3690CCDF2EBDD45200D69A96 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3690CCDE2EBDD45200D69A96 /* SwiftUI.framework */; };
 		3690CCEE2EBDD45400D69A96 /* bibleWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 3690CCDA2EBDD45100D69A96 /* bibleWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		3690CD0E2EBDD8BD00D69A96 /* korean_bible.json in Resources */ = {isa = PBXBuildFile; fileRef = 3690CD0D2EBDD8BD00D69A96 /* korean_bible.json */; };
-		3690CD0F2EBDD8BD00D69A96 /* curated_bible.json in Resources */ = {isa = PBXBuildFile; fileRef = 3690CD0C2EBDD8BD00D69A96 /* curated_bible.json */; };
-		3690CD102EBDD8BD00D69A96 /* korean_bible.json in Resources */ = {isa = PBXBuildFile; fileRef = 3690CD0D2EBDD8BD00D69A96 /* korean_bible.json */; };
-		3690CD112EBDD8BD00D69A96 /* curated_bible.json in Resources */ = {isa = PBXBuildFile; fileRef = 3690CD0C2EBDD8BD00D69A96 /* curated_bible.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,8 +57,6 @@
 		3690CCDA2EBDD45100D69A96 /* bibleWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = bibleWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		3690CCDC2EBDD45100D69A96 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		3690CCDE2EBDD45200D69A96 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
-		3690CD0C2EBDD8BD00D69A96 /* curated_bible.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = curated_bible.json; sourceTree = "<group>"; };
-		3690CD0D2EBDD8BD00D69A96 /* korean_bible.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = korean_bible.json; sourceTree = "<group>"; };
 		3690CD322EC59E7700D69A96 /* bibleWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = bibleWidgetExtension.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -78,6 +72,17 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				BibleVerse.swift,
+				LanguageManager.swift,
+				Resources/Bibles/bible_de.json,
+				Resources/Bibles/bible_en.json,
+				Resources/Bibles/bible_es.json,
+				Resources/Bibles/bible_fr.json,
+				Resources/Bibles/bible_ko.json,
+				Resources/Bibles/bible_pt.json,
+				Resources/Bibles/bible_ru.json,
+				Resources/Bibles/bible_zh_CN.json,
+				Resources/Bibles/bible_zh_TW.json,
+				Resources/curated_references.json,
 			);
 			target = 3690CCD92EBDD45100D69A96 /* bibleWidgetExtension */;
 		};
@@ -156,8 +161,6 @@
 				3690CCE02EBDD45200D69A96 /* bibleWidget */,
 				3690CCDB2EBDD45100D69A96 /* Frameworks */,
 				3690CCAD2EBDBACA00D69A96 /* Products */,
-				3690CD0C2EBDD8BD00D69A96 /* curated_bible.json */,
-				3690CD0D2EBDD8BD00D69A96 /* korean_bible.json */,
 			);
 			sourceTree = "<group>";
 		};
@@ -308,6 +311,14 @@
 			knownRegions = (
 				en,
 				Base,
+				ko,
+				es,
+				"pt-BR",
+				fr,
+				de,
+				ru,
+				"zh-Hans",
+				"zh-Hant",
 			);
 			mainGroup = 3690CCA32EBDBACA00D69A96;
 			minimizedProjectReferenceProxies = 1;
@@ -329,8 +340,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3690CD102EBDD8BD00D69A96 /* korean_bible.json in Resources */,
-				3690CD112EBDD8BD00D69A96 /* curated_bible.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -352,8 +361,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3690CD0E2EBDD8BD00D69A96 /* korean_bible.json in Resources */,
-				3690CD0F2EBDD8BD00D69A96 /* curated_bible.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
