@@ -1,0 +1,59 @@
+{
+  "description": "Russian Psalms versification mapping (Protestant/Hebrew → Septuagint/LXX)",
+  "note": "Russian Synodal Bible uses Septuagint numbering. Title verses vary: some Psalms have 2-verse titles (+2), some have 1-verse titles (+1), most have no title (+0). Psalm 147 is split into Psalms 146-147.",
+  "title_offsets": {
+    "2_verse_title": [
+      17,
+      39,
+      50,
+      51,
+      54,
+      68,
+      77,
+      88,
+      131
+    ],
+    "1_verse_title": [
+      30,
+      58
+    ]
+  },
+  "mappings": {
+    "PSA.106.48": "PSA.105.48",
+    "PSA.115.11": "PSA.113.11",
+    "PSA.119.105": "PSA.118.105",
+    "PSA.119.123": "PSA.118.123",
+    "PSA.119.165": "PSA.118.165",
+    "PSA.119.166": "PSA.118.166",
+    "PSA.122.6": "PSA.121.6",
+    "PSA.130.7": "PSA.129.7",
+    "PSA.132.16": "PSA.131.18",
+    "PSA.132.8": "PSA.131.10",
+    "PSA.132.9": "PSA.131.11",
+    "PSA.14.7": "PSA.13.7",
+    "PSA.147.11": "PSA.146.11",
+    "PSA.147.13": "PSA.147.2",
+    "PSA.18.46": "PSA.17.48",
+    "PSA.31.24": "PSA.30.25",
+    "PSA.35.24": "PSA.34.24",
+    "PSA.35.28": "PSA.34.28",
+    "PSA.37.39": "PSA.36.39",
+    "PSA.40.16": "PSA.39.18",
+    "PSA.50.23": "PSA.49.23",
+    "PSA.51.12": "PSA.50.14",
+    "PSA.52.8": "PSA.51.10",
+    "PSA.55.19": "PSA.54.21",
+    "PSA.55.22": "PSA.54.24",
+    "PSA.59.17": "PSA.58.18",
+    "PSA.66.20": "PSA.65.20",
+    "PSA.69.13": "PSA.68.15",
+    "PSA.73.28": "PSA.72.28",
+    "PSA.74.13": "PSA.73.13",
+    "PSA.78.22": "PSA.77.24",
+    "PSA.78.61": "PSA.77.63",
+    "PSA.86.16": "PSA.85.16",
+    "PSA.89.18": "PSA.88.20",
+    "PSA.89.24": "PSA.88.26",
+    "PSA.94.22": "PSA.93.22"
+  }
+}
