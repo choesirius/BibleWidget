@@ -227,8 +227,8 @@ struct BibleVerseReferenceWidget: Widget {
             }
             .widgetAccentable()
         }
-        .configurationDisplayName("말씀 출처")
-        .description("오늘의 성경 구절 출처")
+        .configurationDisplayName(LanguageManager.shared.currentLanguage.referenceWidgetDisplayName)
+        .description(LanguageManager.shared.currentLanguage.referenceWidgetDescription)
         .supportedFamilies([.accessoryRectangular])
     }
 }
@@ -248,8 +248,8 @@ struct BibleVerseTextWidget: Widget {
             }
             .widgetAccentable()
         }
-        .configurationDisplayName("말씀 본문")
-        .description("오늘의 성경 구절 본문")
+        .configurationDisplayName(LanguageManager.shared.currentLanguage.textWidgetDisplayName)
+        .description(LanguageManager.shared.currentLanguage.textWidgetDescription)
         .supportedFamilies([.accessoryRectangular])
     }
 }

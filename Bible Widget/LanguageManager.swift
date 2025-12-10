@@ -109,6 +109,62 @@ enum BibleLanguage: String, CaseIterable, Codable {
         }
     }
 
+    var referenceWidgetDisplayName: String {
+        switch self {
+        case .korean: return "말씀 출처"
+        case .english: return "Verse Reference"
+        case .spanish: return "Referencia del Versículo"
+        case .portuguese: return "Referência do Versículo"
+        case .french: return "Référence du Verset"
+        case .german: return "Vers-Referenz"
+        case .russian: return "Ссылка на Стих"
+        case .chineseSimplified: return "经文出处"
+        case .chineseTraditional: return "經文出處"
+        }
+    }
+
+    var referenceWidgetDescription: String {
+        switch self {
+        case .korean: return "오늘의 성경 구절 출처"
+        case .english: return "Today's Bible verse reference"
+        case .spanish: return "Referencia del versículo bíblico de hoy"
+        case .portuguese: return "Referência do versículo bíblico de hoje"
+        case .french: return "Référence du verset biblique du jour"
+        case .german: return "Heutige Bibelvers-Referenz"
+        case .russian: return "Ссылка на сегодняшний библейский стих"
+        case .chineseSimplified: return "今日圣经经文出处"
+        case .chineseTraditional: return "今日聖經經文出處"
+        }
+    }
+
+    var textWidgetDisplayName: String {
+        switch self {
+        case .korean: return "말씀 본문"
+        case .english: return "Verse Text"
+        case .spanish: return "Texto del Versículo"
+        case .portuguese: return "Texto do Versículo"
+        case .french: return "Texte du Verset"
+        case .german: return "Vers-Text"
+        case .russian: return "Текст Стиха"
+        case .chineseSimplified: return "经文内容"
+        case .chineseTraditional: return "經文內容"
+        }
+    }
+
+    var textWidgetDescription: String {
+        switch self {
+        case .korean: return "오늘의 성경 구절 본문"
+        case .english: return "Today's Bible verse text"
+        case .spanish: return "Texto del versículo bíblico de hoy"
+        case .portuguese: return "Texto do versículo bíblico de hoje"
+        case .french: return "Texte du verset biblique du jour"
+        case .german: return "Heutiger Bibelvers-Text"
+        case .russian: return "Текст сегодняшнего библейского стиха"
+        case .chineseSimplified: return "今日圣经经文内容"
+        case .chineseTraditional: return "今日聖經經文內容"
+        }
+    }
+
     var copiedAlertTitle: String {
         switch self {
         case .korean: return "복사 완료"
@@ -186,13 +242,37 @@ class LanguageManager {
     private let key = "BibleWidget_Language"
     private let sharedDefaults = UserDefaults(suiteName: "group.com.taehun.biblewidget")
 
-    private init() {}
+    private init() {
+        // 첫 실행 시 시스템 언어로 초기화
+        if sharedDefaults?.string(forKey: key) == nil {
+            let detectedLanguage = detectSystemLanguage()
+            sharedDefaults?.set(detectedLanguage.rawValue, forKey: key)
+        }
+    }
+
+    // 시스템 언어 감지
+    private func detectSystemLanguage() -> BibleLanguage {
+        let preferredLanguage = Locale.preferredLanguages.first ?? "en"
+
+        if preferredLanguage.hasPrefix("ko") { return .korean }
+        if preferredLanguage.hasPrefix("zh-Hans") { return .chineseSimplified }
+        if preferredLanguage.hasPrefix("zh-Hant") { return .chineseTraditional }
+        if preferredLanguage.hasPrefix("es") { return .spanish }
+        if preferredLanguage.hasPrefix("pt") { return .portuguese }
+        if preferredLanguage.hasPrefix("fr") { return .french }
+        if preferredLanguage.hasPrefix("de") { return .german }
+        if preferredLanguage.hasPrefix("ru") { return .russian }
+        if preferredLanguage.hasPrefix("en") { return .english }
+
+        // 지원하지 않는 언어는 영어로 기본값
+        return .english
+    }
 
     var currentLanguage: BibleLanguage {
         get {
             guard let rawValue = sharedDefaults?.string(forKey: key),
                   let language = BibleLanguage(rawValue: rawValue) else {
-                return .korean  // 기본값
+                return .english  // 기본값 변경: 한국어 -> 영어
             }
             return language
         }
